@@ -1,0 +1,17 @@
+<% layout("../layouts/boilerplate") %>
+<body>
+    <h1 class="center-head">Available Listings(<%=listings.length%>)</h1>
+    <div class="card-container">
+        <% listings.forEach(listing => { %>
+        <a href="/listings/<%=listing._id%>">
+           <div class="card index-card" style="width: 18rem">
+               <img src="<%=listing.image%>" class="card-img-top" alt="..." />
+               <div class="card-body index-titles">
+                  <h1 class="card-title "><%=listing.title%></h1>
+                  <p class="card-text"><%=listing.price%>/night</p>
+               </div>
+           </div>
+         <% }); %>
+        </a>
+    </div>
+</body>

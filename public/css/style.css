@@ -1,0 +1,65 @@
+#nav-logo {
+  height: 3rem;
+  margin-left: 1rem;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+#new-head {
+  margin-top: 0.25rem;
+}
+
+.add {
+  background-color: #1f4d3a;
+  border: none;
+}
+
+.detailed-btn {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+}
+
+@media (min-width: 770px) {
+  .detail-card {
+    width: 40rem !important;
+    margin: auto auto;
+  }
+
+  .detail-card img {
+    height: 15rem;
+  }
+}
+
+.center-head {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.index-card img {
+  height: 10rem !important;
+  width: 17rem;
+  border-radius: 1rem;
+}
+
+.card-container {
+  margin-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card-container .card {
+  border: none;
+}
+
+.index-titles {
+  margin: -1rem 0 0 -1rem;
+}
+
+.index-titles h1,
+p {
+  font-size: 1rem;
+}
