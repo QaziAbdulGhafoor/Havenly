@@ -5,6 +5,8 @@ const Listing = require("./models/listing");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
+const ExpressError = require("./utils/ExpressError");
+const wrapAsync = require("./utils/wrapAsync");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views/listings"));
@@ -26,51 +28,73 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.listen(8080, () => {
-  console.log("listening to port", 8080);
-});
-
-app.get("/listings", async (req, res) => {
-  let listings = await Listing.find({});
-  res.render("index", { listings });
-});
+app.get(
+  "/listings",
+  wrapAsync(async (req, res) => {
+    let listings = await Listing.find({});
+    res.render("index", { listings });
+  }),
+);
 
 app.get("/listings/new", (req, res) => {
   res.render("new");
 });
 
-app.post("/listings", async (req, res) => {
-  let listing = new Listing(req.body.listing);
-  await listing.save().then(() => {
-    console.log("added successfully");
-  });
-  res.redirect("/listings");
-});
+app.post(
+  "/listings",
+  wrapAsync(async (req, res) => {
+    let listing = new Listing(req.body.listing);
+    await listing.save().then(() => {
+      console.log("added successfully");
+    });
+    res.redirect("/listings");
+  }),
+);
 
-app.put("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await Listing.findByIdAndUpdate(id, req.body.listing).then(() => {
-    console.log("upadte success");
-  });
-  res.redirect("/listings");
-});
+app.put(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, req.body.listing).then(() => {
+      console.log("upadte success");
+    });
+    res.redirect("/listings");
+  }),
+);
 
-app.get("/listings/:id/edit", async (req, res) => {
-  let { id } = req.params;
-  let Mylisting = await Listing.findOne({ _id: id });
-  res.render("edit", { Mylisting });
-});
+app.get(
+  "/listings/:id/edit",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let Mylisting = await Listing.findOne({ _id: id });
+    res.render("edit", { Mylisting });
+  }),
+);
 
-app.get("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  let listing = await Listing.findOne({ _id: id });
-  res.render("detailedView", { listing });
-});
+app.get(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let listing = await Listing.findOne({ _id: id });
+    res.render("detailedView", { listing });
+  }),
+);
 
-app.delete("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  let result = await Listing.findByIdAndDelete(id).then(() => {
-    console.log("deleted success");
-  });
-  res.redirect("/listings");
+app.delete(
+  "/listings/:id",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let result = await Listing.findByIdAndDelete(id).then(() => {
+      console.log("deleted success");
+    });
+    res.redirect("/listings");
+  }),
+);
+
+app.use((err, req, res, next) => {
+  let { status = 500, message } = err;
+  res.status(status).render("error", { err });
+});
+app.listen(8080, () => {
+  console.log("listening to port", 8080);
 });
