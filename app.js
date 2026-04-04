@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError");
 const wrapAsync = require("./utils/wrapAsync");
+const { listingSchema } = require("./schema");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "./views/listings"));
@@ -28,6 +29,15 @@ const connectDB = async () => {
 };
 connectDB();
 
+const validateListing = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  if (error) {
+    throw new ExpressError(400, error);
+  } else {
+    next();
+  }
+};
+
 app.get(
   "/listings",
   wrapAsync(async (req, res) => {
@@ -42,10 +52,11 @@ app.get("/listings/new", (req, res) => {
 
 app.post(
   "/listings",
+  validateListing,
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
     await listing.save().then(() => {
-      console.log("added successfully");
+      console.log("added successfully", listing);
     });
     res.redirect("/listings");
   }),
@@ -53,6 +64,7 @@ app.post(
 
 app.put(
   "/listings/:id",
+  validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Listing.findByIdAndUpdate(id, req.body.listing).then(() => {
