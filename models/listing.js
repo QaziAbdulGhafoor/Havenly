@@ -1,36 +1,7 @@
+const { ref } = require("joi");
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
-
-// const listingSchema = new Schema({
-//   title: {
-//     type: String,
-//     required: true,
-//     min: 15,
-//     max: 50,
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//     min: 50,
-//     max: 200,
-//   },
-//   image: {
-//     url: String,
-//     required: true,
-//   },
-//   price: {
-//     type: Number,
-//     required: true,
-//   },
-//   location: {
-//     type: String,
-//     required: true,
-//   },
-//   country: {
-//     type: String,
-//     required: true,
-//   },
-// });
+const Review = require("./review");
 
 const listingSchema = new Schema({
   title: {
@@ -50,6 +21,12 @@ const listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
+  reviews: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 let Listing = new mongoose.model("Listing", listingSchema);

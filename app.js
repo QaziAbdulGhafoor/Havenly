@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listing");
+const Review = require("./models/review");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
@@ -100,6 +101,19 @@ app.delete(
       console.log("deleted success");
     });
     res.redirect("/listings");
+  }),
+);
+
+app.post(
+  "/listings/:id/reviews",
+  wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    let listing = await Listing.findOne({ _id: id });
+    let review = new Review(req.body.review);
+    listing.reviews.push(review);
+    await review.save();
+    await listing.save();
+    res.send("review added");
   }),
 );
 
