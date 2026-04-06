@@ -88,7 +88,11 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let listing = await Listing.findOne({ _id: id });
+    await Review.find({});
+    let listing = await Listing.findById(id)
+      .populate("reviews")
+      .populate("reviews");
+    console.log(listing);
     res.render("detailedView", { listing });
   }),
 );
@@ -113,7 +117,7 @@ app.post(
     listing.reviews.push(review);
     await review.save();
     await listing.save();
-    res.send("review added");
+    res.redirect(`/listings/${id}`);
   }),
 );
 

@@ -1,4 +1,3 @@
-const { ref } = require("joi");
 const mongoose = require("mongoose");
 const { Schema } = require("mongoose");
 const Review = require("./review");
@@ -23,7 +22,7 @@ const listingSchema = new Schema({
   country: String,
   reviews: [
     {
-      type: mongoose.Schema.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Review",
     },
   ],
