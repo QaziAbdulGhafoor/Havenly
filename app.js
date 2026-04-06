@@ -89,10 +89,7 @@ app.get(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Review.find({});
-    let listing = await Listing.findById(id)
-      .populate("reviews")
-      .populate("reviews");
-    console.log(listing);
+    let listing = await Listing.findById(id).populate("reviews");
     res.render("detailedView", { listing });
   }),
 );

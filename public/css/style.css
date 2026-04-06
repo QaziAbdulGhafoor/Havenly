@@ -72,3 +72,19 @@ p {
 .error {
   margin-bottom: 53vh;
 }
+
+/* .review span {
+  font-size: 1rem;
+  position: absolute;
+  margin-left: 2rem;
+} */
+
+.review h4,
+p {
+  margin-left: 1rem;
+}
+
+.upper-rev {
+  display: flex;
+  justify-content: space-between;
+}
