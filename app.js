@@ -42,7 +42,7 @@ const validateListing = (req, res, next) => {
 app.get(
   "/listings",
   wrapAsync(async (req, res) => {
-    let listings = await Listing.find({});
+    let listings = await Listing.find({}).populate("reviews");
     res.render("index", { listings });
   }),
 );
