@@ -52,10 +52,14 @@ a {
   margin-bottom: 5rem;
 }
 
-.card-container .card {
+.index-card {
   border: none;
+  transition-duration: 0.25s;
 }
 
+.index-card:hover {
+  transform: translateY(-8px);
+}
 .index-titles {
   margin: -1rem 0 0 -1rem;
 }
