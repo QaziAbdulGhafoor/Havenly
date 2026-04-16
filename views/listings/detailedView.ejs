@@ -98,26 +98,25 @@
 
       <div class="row">
         <% if (listing.reviews && listing.reviews.length > 0) { %>
-          <% listing.reviews.forEach(function(element) { %>
+          <% listing.reviews.forEach(function(review) { %>
 
             <div class="col-md-6 mb-3">
               <div class="card review">
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
                     <h5 class="mb-1">Author</h5>
-                    <span><%for(let i=1;i<=element.ratings;i++){%>
+                    <span><%for(let i=1;i<=review.ratings;i++){%>
                       ⭐
                       <% } %>
                     </span>
                   </div>
 
                   <p class="mt-2 mb-0">
-                    <%= element.comment %>
+                    <%= review.comment %>
                   </p>
-
-                  <button class="btn btn-outline-dark mt-1">Delete</button>
-
-                </div>
+                  <form action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=DELETE" method="post"><button class="btn btn-outline-dark mt-1">Delete</button></form>
+                  
+               </div>
               </div>
             </div>
 

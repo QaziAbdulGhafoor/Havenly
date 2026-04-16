@@ -118,6 +118,14 @@ app.post(
   }),
 );
 
+app.delete("/listings/:id/reviews/:reviewId", async (req, res) => {
+  let { id, reviewId } = req.params;
+  await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+  await Review.findByIdAndDelete(reviewId);
+
+  res.redirect(`/listings/${id}`);
+});
+
 app.use((err, req, res, next) => {
   let { status = 500, message } = err;
   res.status(status).render("error", { err });
