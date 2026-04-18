@@ -1,8 +1,19 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const Listing = require("../models/listing");
 const Review = require("../models/review");
-const { validateReview } = require("../schema");
+const ExpressError = require("../utils/ExpressError");
+const wrapAsync = require("../utils/wrapAsync");
+const { reviewSchema } = require("../schema");
+
+const validateReview = (req, res, next) => {
+  let { error } = reviewSchema.validate(req.body);
+  if (error) {
+    throw new ExpressError(400, error);
+  } else {
+    next();
+  }
+};
 
 //listings/:id/reviews
 router.post(
@@ -29,3 +40,5 @@ router.delete(
     res.redirect(`/listings/${id}`);
   }),
 );
+
+module.exports = router;
