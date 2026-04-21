@@ -11,31 +11,14 @@ app.listen(port, () => {
   console.log("listening to port", port);
 });
 
-app.get("/greet", (req, res) => {
-  let { name = "Hacker" } = req.cookies;
-  console.log(name);
-  res.send(`hello ${name}`);
+app.get("/sendsigned", (req, res) => {
+  res.cookie("owner", "qazi", { signed: true });
+  res.send("signed cookies sent");
 });
 
-app.get("/getcookie", (req, res) => {
-  res.cookie("madeIn", "Pakistan");
-  res.send("cookie sent");
-});
-
-app.get("/cookie2", (req, res) => {
-  res.cookie("bade", "Assalam O Alykum");
-  console.log(req.cookies);
-  res.send("cookie 2 sent");
-});
-
-app.get("/signedcookie", (req, res) => {
-  res.cookie("owner", "Qazi", { signed: true });
-  res.send("signed successfully");
-});
-
-app.get("/allsignedcookies", (req, res) => {
-  res.send("got it");
+app.get("/getsigned", (req, res) => {
   console.log(req.signedCookies);
+  res.send("got signed cokkies");
 });
 
 app.use("/users", user);
