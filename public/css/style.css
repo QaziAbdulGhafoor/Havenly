@@ -1,3 +1,8 @@
+body{
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+}
 #nav-logo {
   height: 3rem;
   margin-left: 1rem;
@@ -15,6 +20,7 @@ a {
   background-color: #1f4d3a;
   border: none;
 }
+
 
 .detailed-btn {
   display: flex;
