@@ -34,9 +34,7 @@ router.post(
   validateListing,
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
-    await listing.save().then(() => {
-      console.log("added successfully", listing);
-    });
+    await listing.save();
     res.redirect("/");
   }),
 );

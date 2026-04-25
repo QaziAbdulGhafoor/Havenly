@@ -8,7 +8,21 @@ const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError");
 const wrapAsync = require("./utils/wrapAsync");
+const session = require("express-session");
+const flash = require("connect-flash");
 const { listingSchema } = require("./schema");
+// app.use(flash());
+// let sessionVariables = {
+//   secret: "AbdulHadi",
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+//     maxAge: 7 * 24 * 60 * 60 * 1000,
+//     httpOnly: true,
+//   },
+// };
+// app.use(session(sessionVariables));
 
 const listings = require("./routes/listings");
 const review = require("./routes/review");

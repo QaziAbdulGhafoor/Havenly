@@ -15,7 +15,6 @@ connectDB();
 
 let addListings = async () => {
   let res = await Listing.insertMany(allListings);
-  console.log(res);
 };
 
 addListings();
