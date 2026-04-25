@@ -4,6 +4,7 @@ const ExpressError = require("../utils/ExpressError");
 const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
+const flash = require("connect-flash");
 const { listingSchema } = require("../schema");
 
 const validateListing = (req, res, next) => {
@@ -35,6 +36,7 @@ router.post(
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
     await listing.save();
+    req.flash("success", "listing added Successfully");
     res.redirect("/");
   }),
 );
