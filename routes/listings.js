@@ -84,7 +84,7 @@ router.delete(
     let result = await Listing.findByIdAndDelete(id).then(() => {
       console.log("deleted success");
     });
-    res.redirect("/");
+    res.redirect(`/listings`);
   }),
 );
 
