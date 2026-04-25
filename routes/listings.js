@@ -37,7 +37,7 @@ router.post(
     let listing = new Listing(req.body.listing);
     await listing.save();
     req.flash("success", "listing added Successfully");
-    res.redirect("/");
+    res.redirect("/listings");
   }),
 );
 
@@ -50,7 +50,7 @@ router.put(
     await Listing.findByIdAndUpdate(id, req.body.listing).then(() => {
       console.log("update success");
     });
-    res.redirect("/listings");
+    res.redirect(`/listings/${id}`);
   }),
 );
 
@@ -81,9 +81,7 @@ router.delete(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let result = await Listing.findByIdAndDelete(id).then(() => {
-      console.log("deleted success");
-    });
+    let result = await Listing.findByIdAndDelete(id);
     res.redirect(`/listings`);
   }),
 );

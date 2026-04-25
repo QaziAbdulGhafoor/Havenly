@@ -1,5 +1,6 @@
 <% layout("../layouts/boilerplate") %>
 <body>
+    <%= successMsg %>
     <h1 class="center-head">Available Listings(<%=listings.length%>)</h1>
     <div class="card-container">
         <% listings.forEach(listing => { %>
