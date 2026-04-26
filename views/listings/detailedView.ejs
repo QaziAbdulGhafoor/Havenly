@@ -1,15 +1,14 @@
 <% layout("../layouts/boilerplate") %>
 
 <body>
-  <h2 class="text-center mb-4">
+  <h2 class="text-center mb-4 mt-2">
     <%= listing.title %>
   </h2>
 
   <!-- Listing Card -->
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 col-lg-6">
       <div class="card detail-card mb-4">
-        
         <img
           src="<%= listing.image.url ? listing.image.url : listing.image %>"
           class="card-img-top"
@@ -55,7 +54,7 @@
 
   <!-- Review Form -->
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 col-lg-6">
       <form
         action="/listings/<%= listing._id %>/reviews"
         method="POST"
@@ -93,7 +92,7 @@
 
   <!-- Reviews Section -->
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 col-lg-6">
       <h4 class="mb-3">All Reviews</h4>
 
       <div class="row">

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Listing = require("../models/listing");
-const allListings = require("./data");
+const sampleListings = require("./data");
 
 const connectDB = async () => {
   try {
@@ -14,7 +14,8 @@ const connectDB = async () => {
 connectDB();
 
 let addListings = async () => {
-  let res = await Listing.insertMany(allListings);
+  let del = await Listing.deleteMany({});
+  let res = await Listing.insertMany(sampleListings.data);
 };
 
 addListings();
