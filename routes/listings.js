@@ -4,6 +4,7 @@ const ExpressError = require("../utils/ExpressError");
 const wrapAsync = require("../utils/wrapAsync");
 const Listing = require("../models/listing");
 const Review = require("../models/review");
+const flash = require("connect-flash");
 const { listingSchema } = require("../schema");
 
 const validateListing = (req, res, next) => {
@@ -35,6 +36,7 @@ router.post(
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
     await listing.save();
+    req.flash("success", "listing Added Successfully");
     res.redirect("/listings");
   }),
 );
@@ -45,10 +47,9 @@ router.put(
   validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    await Listing.findByIdAndUpdate(id, req.body.listing).then(() => {
-      console.log("update success");
-    });
-    res.redirect("/listings");
+    await Listing.findByIdAndUpdate(id, req.body.listing);
+    req.flash("success", "Listing Updated Successfully");
+    res.redirect(`/listings/${id}`);
   }),
 );
 
@@ -69,7 +70,12 @@ router.get(
     let { id } = req.params;
     await Review.find({});
     let listing = await Listing.findById(id).populate("reviews");
-    res.render("detailedView", { listing });
+    if (!listing) {
+      req.flash("error", "Listing Not Found");
+      res.redirect("/listings");
+    } else {
+      res.render("detailedView", { listing });
+    }
   }),
 );
 
@@ -79,9 +85,9 @@ router.delete(
   "/:id",
   wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let result = await Listing.findByIdAndDelete(id).then(() => {
-      console.log("deleted success");
-    });
+    let listing = await Listing.findById(id);
+    let result = await Listing.findByIdAndDelete(id);
+    req.flash("success", `Listing ${listing.title} Deleted Successfully`);
     res.redirect(`/listings`);
   }),
 );
