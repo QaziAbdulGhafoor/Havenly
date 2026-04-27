@@ -35,7 +35,7 @@ router.post(
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
     await listing.save();
-    res.redirect("/");
+    res.redirect("/listings");
   }),
 );
 
