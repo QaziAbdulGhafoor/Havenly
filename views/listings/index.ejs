@@ -1,30 +1,9 @@
-<!-- <% layout("../layouts/boilerplate") %>
+ <% layout("../layouts/boilerplate") %>
 <body>
-    <h1 class="center-head">Available Listings(<%=listings.length%>)</h1>
-    <div class="container">
-        <div class="row">
-        <% listings.forEach(listing => { %>
-            <div class="card index-card col-md-3" ></div>
-        <a href="/listings/<%=listing._id%>">
-               <img src="<%=listing.image%>" class="card-img-top" alt="..." />
-               <div class="card-body index-titles">
-                  <h1 class="card-title "><%=listing.title%></h1>
-                  <p class="card-text">Per Day: <b><%=listing.price%></b></p>
-               </div>
-           
-           </a>
-           </div>
-         <% }); %>
-        </div>
-    </div>  
-</body>
-
- -->
-
  <div class="row g-4">
     <h1 class="center-head">Available(<%=listings.length%>)</h1>
     <% listings.forEach(listing => { %>
-        <div class="col-sm-6 col-lg-4 col-xl-3">
+        <div class="col-sm-6 col-lg-4 col-xl-3 ">
             <a href="/listings/<%=listing._id%>" class="text-decoration-none">
                 <div class="card index-card h-100">
                     <img src="<%=listing.image%>" class="card-img-top" />
@@ -37,3 +16,7 @@
         </div>
     <% }); %>
 </div>
+</body>
+
+
+

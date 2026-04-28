@@ -5,7 +5,6 @@ body {
 }
 #nav-logo {
   height: 3rem;
-  margin-left: 1rem;
 }
 
 a {
@@ -32,6 +31,9 @@ a {
     height: 20rem;
     object-fit: cover;
   }
+  #nav-logo {
+    margin-left: 1rem;
+  }
 }
 
 .center-head {
@@ -42,6 +44,7 @@ a {
 .index-card img {
   height: 10rem !important;
   width: 100%;
+  object-fit: cover;
   border-radius: 1rem;
 }
 
