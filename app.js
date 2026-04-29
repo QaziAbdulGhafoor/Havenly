@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listing");
 const Review = require("./models/review");
+const User = require("./models/user.js");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
@@ -11,7 +12,21 @@ const wrapAsync = require("./utils/wrapAsync");
 const session = require("express-session");
 const flash = require("connect-flash");
 const { listingSchema } = require("./schema");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 
+const listingRouter = require("./routes/listings");
+const reviewRouter = require("./routes/review");
+const userRouter = require("./routes/user");
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "./views/listings"));
+app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static("assets"));
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+
+app.use(flash());
 let sessionVariables = {
   secret: "AbdulHadi",
   resave: false,
@@ -24,24 +39,22 @@ let sessionVariables = {
 };
 app.use(session(sessionVariables));
 
-const listings = require("./routes/listings");
-const review = require("./routes/review");
+// implementing passport
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "./views/listings"));
-app.use(express.static(path.join(__dirname, "/public")));
-app.use(express.static("assets"));
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
-
-app.use(flash());
 app.use((req, res, next) => {
   res.locals.successMsg = req.flash("success");
   res.locals.errorMsg = req.flash("error");
   next();
 });
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", review);
+
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 app.engine("ejs", ejsMate);
 
@@ -55,6 +68,17 @@ const connectDB = async () => {
   }
 };
 connectDB();
+
+app.get("/demo", async (req, res) => {
+  let newUser = new User({
+    email: "abc@gmail.com",
+    username: "abdulhanan",
+  });
+
+  let result = await User.register(newUser, "hellopassword");
+  console.log(result);
+  res.send("done user");
+});
 
 // reviews
 
