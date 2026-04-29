@@ -19,8 +19,9 @@ const listingRouter = require("./routes/listings");
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user");
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "./views/listings"));
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
@@ -56,8 +57,6 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-app.engine("ejs", ejsMate);
-
 const connectDB = async () => {
   try {
     await mongoose.connect("mongodb://127.0.0.1:27017/Havenly");
@@ -84,7 +83,7 @@ app.get("/demo", async (req, res) => {
 
 app.use((err, req, res, next) => {
   let { status = 500, message } = err;
-  res.status(status).render("error", { err });
+  res.status(status).render("listings/error.ejs", { err });
 });
 app.listen(8080, () => {
   console.log("listening to port", 8080);

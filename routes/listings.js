@@ -21,13 +21,13 @@ router.get(
   "/",
   wrapAsync(async (req, res) => {
     let listings = await Listing.find({}).populate("reviews");
-    res.render("index", { listings });
+    res.render("listings/index", { listings });
   }),
 );
 
 //new route
 router.get("/new", (req, res) => {
-  res.render("new");
+  res.render("listings/new");
 });
 
 router.post(
@@ -59,7 +59,7 @@ router.get(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let Mylisting = await Listing.findOne({ _id: id });
-    res.render("edit", { Mylisting });
+    res.render("listings/edit", { Mylisting });
   }),
 );
 
@@ -74,7 +74,7 @@ router.get(
       req.flash("error", "Listing Not Found");
       res.redirect("/listings");
     } else {
-      res.render("detailedView", { listing });
+      res.render("listings/detailedView", { listing });
     }
   }),
 );
