@@ -68,16 +68,16 @@ const connectDB = async () => {
 };
 connectDB();
 
-app.get("/demo", async (req, res) => {
-  let newUser = new User({
-    email: "abc@gmail.com",
-    username: "abdulhanan",
-  });
+// app.get("/demo", async (req, res) => {
+//   let newUser = new User({
+//     email: "abc@gmail.com",
+//     username: "abdulhanan",
+//   });
 
-  let result = await User.register(newUser, "hellopassword");
-  console.log(result);
-  res.send("done user");
-});
+//   let result = await User.register(newUser, "hellopassword");
+//   console.log(result);
+//   res.send("done user");
+// });
 
 // reviews
 
