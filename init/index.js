@@ -17,9 +17,10 @@ let addListings = async () => {
   let del = await Listing.deleteMany({});
   sampleListings.data = sampleListings.data.map((obj) => ({
     ...obj,
-    owner: "69f58db1e54b17760d6efcc8",
+    owner: "69f497bbc44b577734b1c7e2",
   }));
   let res = await Listing.insertMany(sampleListings.data);
+  console.log("all added");
 };
 
 addListings();

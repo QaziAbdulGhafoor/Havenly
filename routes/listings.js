@@ -7,7 +7,7 @@ const Review = require("../models/review");
 const flash = require("connect-flash");
 const passport = require("passport");
 const { listingSchema } = require("../schema");
-const { isLoggedIn } = require("../middleware");
+const { isLoggedIn, isOwner } = require("../middleware");
 
 const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
@@ -49,9 +49,15 @@ router.post(
 router.put(
   "/:id",
   isLoggedIn,
+  isOwner,
   validateListing,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
+    const listing = await Listing.findById(id);
+    if (!listing.owner._id.equals(res.locals.user._id)) {
+      req.flash("error", "you don't have permission");
+      return res.redirect(`/listings/${id}`);
+    }
     await Listing.findByIdAndUpdate(id, req.body.listing);
     req.flash("success", "Listing Updated Successfully");
     res.redirect(`/listings/${id}`);
@@ -62,6 +68,7 @@ router.put(
 router.get(
   "/:id/edit",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let Mylisting = await Listing.findOne({ _id: id });
@@ -76,7 +83,12 @@ router.get(
     let { id } = req.params;
     await Review.find({});
     let listing = await Listing.findById(id)
-      .populate("reviews")
+      .populate({
+        path: "reviews",
+        populate: {
+          path: "author",
+        },
+      })
       .populate("owner");
     if (!listing) {
       req.flash("error", "Listing Not Found");
@@ -93,6 +105,7 @@ router.get(
 router.delete(
   "/:id",
   isLoggedIn,
+  isOwner,
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let listing = await Listing.findById(id);
