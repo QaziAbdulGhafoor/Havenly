@@ -22,7 +22,7 @@ const validateListing = (req, res, next) => {
 router.get(
   "/",
   wrapAsync(async (req, res) => {
-    let listings = await Listing.find({}).populate("reviews");
+    let listings = await Listing.find({}).populate("reviews").populate("owner");
     res.render("listings/index", { listings });
   }),
 );
@@ -38,6 +38,7 @@ router.post(
   validateListing,
   wrapAsync(async (req, res) => {
     let listing = new Listing(req.body.listing);
+    listing.owner = req.user._id;
     await listing.save();
     req.flash("success", "listing Added Successfully");
     res.redirect("/listings");
@@ -74,12 +75,15 @@ router.get(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Review.find({});
-    let listing = await Listing.findById(id).populate("reviews");
+    let listing = await Listing.findById(id)
+      .populate("reviews")
+      .populate("owner");
     if (!listing) {
       req.flash("error", "Listing Not Found");
       res.redirect("/listings");
     } else {
       res.render("listings/detailedView", { listing });
+      console.log(listing);
     }
   }),
 );
