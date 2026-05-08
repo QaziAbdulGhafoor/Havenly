@@ -87,12 +87,15 @@ p {
   margin-left: 2rem;
 } */
 
-.review h4,
-p {
-  margin-left: 1rem;
+.review p {
+  margin-left: 2rem !important;
 }
 
-.upper-rev {
+/* .upper-rev {
   display: flex;
   justify-content: space-between;
+} */
+
+#rev-stars {
+  width: 10%;
 }

@@ -67,8 +67,20 @@
         class="mb-4"
       >
         <div class="mb-3">
-          <label for="rating" class="form-label">Rating:</label>
-          <input
+           <fieldset class="starability-slot">
+  <legend>Ratings:</legend>
+  <input type="radio" id="first-rate5" name="review[ratings]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+  <input type="radio" id="first-rate4" name="review[ratings]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate3" name="review[ratings]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate2" name="review[ratings]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate1" name="review[ratings]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+</fieldset>
+          <!-- <input
             type="range"
             id="rating"
             min="1"
@@ -77,9 +89,9 @@
             class="form-range"
             oninput="this.nextElementSibling.value = this.value"
           />
-          <output>3</output>
+          <output>3</output> -->
         </div>
-
+         
         <div class="mb-3">
           <label for="comment" class="form-label">
             Enter your comment:
@@ -111,15 +123,13 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
                     <h5 class="mb-1"><%= review.author.username %></h5>
-                    <span><%for(let i=1;i<=review.ratings;i++){%>
-                      ⭐
-                      <% } %>
-                    </span>
                   </div>
-
                   <p class="mt-2 mb-0">
                     <%= review.comment %>
                   </p>
+                    <p class="starability-result" id="rev-stars"data-rating="<%= review.ratings %>">
+                      Rated: 3 stars
+                    </p>
                   <% if(review.author._id.equals(user._id)){ %>
                   <form action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=DELETE" method="post"><button class="btn btn-outline-dark mt-1">Delete</button></form>
                   <% } %>
