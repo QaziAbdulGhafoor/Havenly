@@ -6,7 +6,7 @@
         <div class="col-sm-6 col-lg-4 col-xl-3 ">
             <a href="/listings/<%=listing._id%>" class="text-decoration-none">
                 <div class="card index-card h-100">
-                    <img src="<%=listing.image%>" class="card-img-top" />
+                    <img src="<%=listing.image.url%>" class="card-img-top" />
                     <div class="card-body index-titles">
                         <h5 class="card-title"><%=listing.title%></h5>
                         <p class="card-text">Per Day: <b><%=listing.price%></b></p>

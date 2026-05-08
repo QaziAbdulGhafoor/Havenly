@@ -5,6 +5,7 @@
   novalidate
   method="post"
   action="/listings"
+  enctype="multipart/form-data"
 >
   <div class="col-12 mb-1">
     <label for="inputEmail4" class="form-label">Enter Listing Title:</label>
@@ -19,7 +20,7 @@
     <div class="valid-feedback">Title Looks good!</div>
     <div class="invalid-feedback">Invalid listing name</div>
   </div>
-  <div class="col-8 mb-1">
+  <!-- <div class="col-8 mb-1">
     <label for="image" class="form-label">Enter Image Link:</label>
     <input
       type="text"
@@ -31,7 +32,22 @@
     />
     <div class="valid-feedback">Image Looks good!</div>
     <div class="invalid-feedback">Invalid image link</div>
+  </div> -->
+
+  <div class="col-8 mb-1">
+    <label for="image" class="form-label">Enter Image Link:</label>
+    <input
+      type="file"
+      class="form-control"
+      id="image"
+      placeholder="Enter a listing name"
+      name="listing[image]"
+      required
+    />
+    <div class="valid-feedback">Image Looks good!</div>
+    <div class="invalid-feedback">Invalid image link</div>
   </div>
+
   <div class="col-4 mb-1">
     <label for="inputState" class="form-label">Price:</label>
     <input

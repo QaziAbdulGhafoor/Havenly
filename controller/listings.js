@@ -7,8 +7,11 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.postNew = async (req, res) => {
+  let url = req.file.path;
+  let filename = req.file.filename;
   let listing = new Listing(req.body.listing);
   listing.owner = req.user._id;
+  listing.image = { url, filename };
   await listing.save();
   req.flash("success", "listing Added Successfully");
   res.redirect("/listings");
