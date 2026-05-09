@@ -16,6 +16,7 @@ const flash = require("connect-flash");
 const { listingSchema } = require("./schema");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const axios = require("axios");
 
 const listingRouter = require("./routes/listings");
 const reviewRouter = require("./routes/review");
@@ -91,3 +92,27 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("listening to port", 8080);
 });
+
+// try {
+//   const address = "Karachi,Sindh,Pakistan ";
+
+//   const result = await axios.get(
+//     `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+//       address,
+//     )}&format=json&limit=1`,
+//     {
+//       headers: {
+//         "User-Agent": "havenly-app",
+//       },
+//     },
+//   );
+
+//   // const data = await result.json();
+
+//   console.log(result.data);
+
+//   res.send(result.data);
+// } catch (err) {
+//   console.log(err);
+//   res.status(500).send("Something went wrong");
+// }

@@ -35,8 +35,10 @@ router
   .put(
     isLoggedIn,
     isOwner,
+    upload.single("listing[image]"),
     validateListing,
-    wrapAsync(listingController.updateListing),
+
+    wrapAsync(listingController.postUpdate),
   )
   .get(wrapAsync(listingController.detailedView))
   .delete(isLoggedIn, isOwner, wrapAsync(listingController.delete));
@@ -46,6 +48,7 @@ router.get(
   "/:id/edit",
   isLoggedIn,
   isOwner,
+
   wrapAsync(listingController.getUpdate),
 );
 

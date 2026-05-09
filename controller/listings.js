@@ -1,5 +1,6 @@
 const Listing = require("../models/listing");
 const Review = require("../models/review");
+const axios = require("axios");
 
 module.exports.index = async (req, res) => {
   let listings = await Listing.find({}).populate("reviews").populate("owner");
@@ -7,12 +8,27 @@ module.exports.index = async (req, res) => {
 };
 
 module.exports.postNew = async (req, res) => {
-  let url = req.file.path;
-  let filename = req.file.filename;
-  let listing = new Listing(req.body.listing);
-  listing.owner = req.user._id;
-  listing.image = { url, filename };
-  await listing.save();
+  // let url = req.file.path;
+  // let filename = req.file.filename;
+  // let listing = new Listing(req.body.listing);
+  // listing.owner = req.user._id;
+  // listing.image = { url, filename };
+  // await listing.save();
+
+  const address = req.body.listing.location;
+
+  const result = await axios.get(
+    `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+      address,
+    )}&format=json&limit=1`,
+    {
+      headers: {
+        "User-Agent": "havenly-app",
+      },
+    },
+  );
+  console.log(result.data);
+
   req.flash("success", "listing Added Successfully");
   res.redirect("/listings");
 };
@@ -24,11 +40,13 @@ module.exports.getNew = (req, res) => {
 module.exports.postUpdate = async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
-  if (!listing.owner._id.equals(res.locals.user._id)) {
-    req.flash("error", "you don't have permission");
-    return res.redirect(`/listings/${id}`);
+  let updateListings = await Listing.findByIdAndUpdate(id, req.body.listing);
+  if (typeof req.file !== "undefined") {
+    let url = req.file.path;
+    let filename = req.file.filename;
+    updateListings.image = { url, filename };
+    await updateListings.save();
   }
-  await Listing.findByIdAndUpdate(id, req.body.listing);
   req.flash("success", "Listing Updated Successfully");
   res.redirect(`/listings/${id}`);
 };
@@ -36,7 +54,10 @@ module.exports.postUpdate = async (req, res) => {
 module.exports.getUpdate = async (req, res) => {
   let { id } = req.params;
   let Mylisting = await Listing.findOne({ _id: id });
-  res.render("listings/edit", { Mylisting });
+
+  let originalImage = Mylisting.image.url;
+  originalImage = originalImage.replace("/upload", "/upload/w_250,h_300");
+  res.render("listings/edit", { Mylisting, originalImage });
 };
 
 module.exports.detailedView = async (req, res) => {
