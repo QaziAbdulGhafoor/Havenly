@@ -2,22 +2,8 @@ const Listing = require("../models/listing");
 const Review = require("../models/review");
 const axios = require("axios");
 
-module.exports.index = async (req, res) => {
-  let listings = await Listing.find({}).populate("reviews").populate("owner");
-  res.render("listings/index", { listings });
-};
-
-module.exports.postNew = async (req, res) => {
-  // let url = req.file.path;
-  // let filename = req.file.filename;
-  // let listing = new Listing(req.body.listing);
-  // listing.owner = req.user._id;
-  // listing.image = { url, filename };
-  // await listing.save();
-
-  const address = req.body.listing.location;
-
-  const result = await axios.get(
+async function getCoord(address) {
+  let result = await axios.get(
     `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
       address,
     )}&format=json&limit=1`,
@@ -27,9 +13,34 @@ module.exports.postNew = async (req, res) => {
       },
     },
   );
-  console.log(result.data);
+  return [Number(result.data[0].lon), Number(result.data[0].lat)];
+}
+// const coordinates = [result.data[0].lon, result.data[0].lat];
+// console.log(coordinates);
+// module.exports.coordinates = coordinates;
 
-  req.flash("success", "listing Added Successfully");
+module.exports.index = async (req, res) => {
+  let listings = await Listing.find({}).populate("reviews").populate("owner");
+  res.render("listings/index", { listings });
+};
+
+module.exports.postNew = async (req, res) => {
+  let url = req.file.path;
+  let filename = req.file.filename;
+  let listing = new Listing(req.body.listing);
+  let address = req.body.listing.location;
+  const coordinates = await getCoord(address);
+  listing.geometry = {
+    type: "Point",
+    coordinates: coordinates,
+  };
+  listing.owner = req.user._id;
+  listing.image = { url, filename };
+  await listing.save();
+
+  console.log(coordinates, listing);
+
+  const result = req.flash("success", "listing Added Successfully");
   res.redirect("/listings");
 };
 
