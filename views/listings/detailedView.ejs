@@ -28,7 +28,7 @@
             <b>Location:</b> <%= listing.location %>
           </li>
           <li class="list-group-item">
-            <b>Price:</b> Rs/ <%= listing.price.toLocaleString("en-PK") %>
+            <b>Price:</b> <%= listing.price %><b> $</b>
           </li>
           <li class="list-group-item">
             <b>Owner:</b> <%= listing.owner.username %>
@@ -130,7 +130,7 @@
                     <p class="starability-result" id="rev-stars"data-rating="<%= review.ratings %>">
                       Rated: 3 stars
                     </p>
-                  <% if(review.author._id.equals(user._id)){ %>
+                  <% if(user && review.author._id.equals(user._id)){ %>
                   <form action="/listings/<%=listing.id%>/reviews/<%=review.id%>?_method=DELETE" method="post"><button class="btn btn-outline-dark mt-1">Delete</button></form>
                   <% } %>
                </div>
@@ -145,7 +145,8 @@
     </div>
   </div>
   
-  <div class="col-md-8 col-lg-6 offset-3">
+  <div class="col-md-8 col-lg-12">
+    <h1>Where You Will Be</h1>
   <div
   id="map"
   data-coordinates='<%- JSON.stringify(listing.geometry.coordinates) %>'

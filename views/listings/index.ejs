@@ -1,7 +1,7 @@
  <% layout("layouts/boilerplate") %>
 <body>
- <div class="row g-4">
-    <h1 class="center-head">Available(<%=listings.length%>)</h1>
+ <div class="row g-4 mt-3">
+    
     <% listings.forEach(listing => { %>
         <div class="col-sm-6 col-lg-4 col-xl-3 ">
             <a href="/listings/<%=listing._id%>" class="text-decoration-none">
@@ -9,7 +9,7 @@
                     <img src="<%=listing.image.url%>" class="card-img-top" />
                     <div class="card-body index-titles">
                         <h5 class="card-title"><%=listing.title%></h5>
-                        <p class="card-text">Per Day: <b><%=listing.price%></b></p>
+                        <p class="card-text">Per Day: <b><%=listing.price%>$</b></p>
                     </div>
                 </div>
             </a>

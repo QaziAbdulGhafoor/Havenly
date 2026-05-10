@@ -1,3 +1,15 @@
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Cormorant Garamond", serif;
+}
+body,
+button,
+input {
+  font-family: "DM Sans", sans-serif;
+}
+
 body {
   display: flex;
   flex-direction: column;
