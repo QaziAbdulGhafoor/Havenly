@@ -32,6 +32,51 @@ a {
   border: none;
 }
 
+.category {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.category a {
+  color: #9e9e9e;
+  transition-duration: 0.3s;
+}
+
+.category-option {
+  display: flex;
+}
+
+.category a:hover {
+  transform: scale(1.2);
+  text-shadow: 2px 2px 4px grey;
+}
+
+.category i {
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
+}
+
+#house:hover {
+  color: #4caf50;
+}
+
+#mount:hover {
+  color: #795548;
+}
+
+#rivers:hover {
+  color: #00bcd4;
+}
+
+#apart:hover {
+  color: #2196f3;
+}
+
+#luxury:hover {
+  color: #ffd700;
+}
+
 .detailed-btn {
   display: flex;
   justify-content: flex-start;
@@ -45,6 +90,12 @@ a {
   }
   #nav-logo {
     margin-left: 1rem;
+  }
+}
+
+@media (max-width: 770px) {
+  .category-option p {
+    display: none;
   }
 }
 

@@ -1,7 +1,14 @@
  <% layout("layouts/boilerplate") %>
 <body>
  <div class="row g-4 mt-3">
-    
+    <div class="category">
+        <a href="/listings?category=house" id="house"><span class="category-option"><i class="fa-solid fa-house"></i><p>House</p></span></a>
+        <a href="/listings?category=apartment" id="apart"><span class="category-option"><i class="fa-solid fa-building"  ></i><p>Apartments</p></span></a>
+        <a href="/listings?category=river side" id="rivers"><span class="category-option"><i class="fa-solid fa-water"  ></i><p>River Side</p></span></a>
+        <a href="/listings?category=mountain" id="mount"><span class="category-option"><i class="fa-solid fa-mountain" ></i><p>Mountains</p></span></a>
+        <a href="/listings?category=luxury" id="luxury"><span class="category-option"><i class="fa-solid fa-gem" ></i><p>Luxury</p></span></a>
+    </div>
+
     <% listings.forEach(listing => { %>
         <div class="col-sm-6 col-lg-4 col-xl-3 ">
             <a href="/listings/<%=listing._id%>" class="text-decoration-none">

@@ -7,7 +7,7 @@
   action="/listings"
   enctype="multipart/form-data"
 >
-  <div class="col-12 mb-1">
+  <div class="col-md-8 mb-1">
     <label for="inputEmail4" class="form-label">Enter Listing Title:</label>
     <input
       type="text"
@@ -19,6 +19,18 @@
     />
     <div class="valid-feedback">Title Looks good!</div>
     <div class="invalid-feedback">Invalid listing name</div>
+  </div>
+  <div class="col-md-4 mb-1">
+    <label for="floatingSelect" class="form-label"
+      >Select Listing Category:</label
+    >
+    <select class="form-control" id="floatingSelect" name="listing[category]">
+      <option value="house">House</option>
+      <option value="apartment">Apartment</option>
+      <option value="mountain">Mountains</option>
+      <option value="river side">River Side</option>
+      <option value="luxury">Luxury</option>
+    </select>
   </div>
   <!-- <div class="col-8 mb-1">
     <label for="image" class="form-label">Enter Image Link:</label>
@@ -34,8 +46,8 @@
     <div class="invalid-feedback">Invalid image link</div>
   </div> -->
 
-  <div class="col-8 mb-1">
-    <label for="image" class="form-label">Enter Image Link:</label>
+  <div class="col-md-8 mb-1">
+    <label for="image" class="form-label">Upload An Image:</label>
     <input
       type="file"
       class="form-control"
@@ -48,7 +60,7 @@
     <div class="invalid-feedback">Invalid image link</div>
   </div>
 
-  <div class="col-4 mb-1">
+  <div class="col-md-4 mb-1">
     <label for="inputState" class="form-label">Price:</label>
     <input
       type="number"

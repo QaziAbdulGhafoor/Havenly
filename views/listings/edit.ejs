@@ -7,7 +7,7 @@
   action="/listings/<%= Mylisting._id %>?_method=PUT"
   enctype="multipart/form-data"
 >
-  <div class="col-12 mb-1">
+  <div class="col-md-8 mb-1">
     <label for="inputEmail4" class="form-label">Edit listing title:</label>
     <input
       type="text"
@@ -20,6 +20,18 @@
     />
     <div class="valid-feedback">Title Looks good!</div>
     <div class="invalid-feedback">Invalid listing name</div>
+  </div>
+  <div class="col-md-4 mb-1">
+    <label for="floatingSelect" class="form-label"
+      >Select Listing Category:</label
+    >
+    <select class="form-control" id="floatingSelect" name="listing[category]">
+      <option value="house">House</option>
+      <option value="apartment">Apartment</option>
+      <option value="mountain">Mountains</option>
+      <option value="river side">River Side</option>
+      <option value="luxury">Luxury</option>
+    </select>
   </div>
   <div class="col-6">
     Already Image <br /><img src="<%= originalImage %>" alt="" />
@@ -67,7 +79,7 @@
       value="<%= Mylisting.country %>"
       name="listing[country]"
       required
-      disabled
+      hidden
     />
     <div class="valid-feedback">Country is Valid</div>
     <div class="invalid-feedback">Invalid country name</div>
@@ -82,7 +94,7 @@
       name="listing[location]"
       value="<%= Mylisting.location %>"
       required
-      disabled
+      hidden
     />
     <div class="valid-feedback">Address Looks good!</div>
     <div class="invalid-feedback">Invalid address</div>

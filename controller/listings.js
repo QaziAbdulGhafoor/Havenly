@@ -20,8 +20,22 @@ async function getCoord(address) {
 // module.exports.coordinates = coordinates;
 
 module.exports.index = async (req, res) => {
-  let listings = await Listing.find({}).populate("reviews").populate("owner");
-  res.render("listings/index", { listings });
+  let category = req.query.category;
+  let listings;
+  if (category) {
+    listings = await Listing.find({ category: category })
+      .populate("reviews")
+      .populate("owner");
+    if (listings.length !== 0) {
+      res.render("listings/index", { listings });
+    } else {
+      req.flash("error", `Sorry! Nothing in ${category} category`);
+      res.redirect("/listings");
+    }
+  } else {
+    listings = await Listing.find({}).populate("reviews").populate("owner");
+    res.render("listings/index", { listings });
+  }
 };
 
 module.exports.postNew = async (req, res) => {
