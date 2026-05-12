@@ -52,7 +52,7 @@ module.exports.postNew = async (req, res) => {
   listing.image = { url, filename };
   await listing.save();
 
-  console.log(listing);
+  // console.log(listing);
 
   const result = req.flash("success", "listing Added Successfully");
   res.redirect("/listings");
@@ -101,7 +101,7 @@ module.exports.detailedView = async (req, res) => {
     res.redirect("/listings");
   } else {
     res.render("listings/detailedView", { listing });
-    console.log(listing);
+    // console.log(listing);
   }
 };
 

@@ -99,6 +99,37 @@ a {
   }
 }
 
+.search {
+  height: 2.5rem;
+
+  border-radius: 1rem;
+}
+
+.search input,
+button {
+  height: 100%;
+  border: none;
+  outline: none;
+}
+.search input {
+  width: 70%;
+  border-radius: 1rem 0 0 1rem;
+  padding-left: 1rem;
+  border: 1px solid #1f4d3a;
+  border-right: none;
+}
+
+.search button {
+  width: 30%;
+  border-radius: 0 0.8rem 0.8rem 0;
+  background-color: #1f4d3a;
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.search button:hover {
+  background-color: #4caf50;
+}
 .center-head {
   text-align: center;
   /* margin: 1rem 0; */

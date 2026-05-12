@@ -39,7 +39,7 @@ const listingSchema = new Schema({
   category: {
     type: String,
     required: true,
-    enum: ["houe", "mountain", "apartment", "river side", "luxury"],
+    enum: ["house", "mountain", "apartment", "river side", "luxury"],
   },
 });
 
