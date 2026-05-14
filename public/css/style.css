@@ -14,10 +14,19 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: auto;
 }
 #nav-logo {
   height: 3rem;
 }
+
+/* .navbar {
+  position: sticky !important;
+  position: -webkit-sticky;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+} */
 
 a {
   text-decoration: none !important;
@@ -101,8 +110,10 @@ a {
 
 .search {
   height: 2.5rem;
-
+  display: flex;
+  flex-direction: row;
   border-radius: 1rem;
+  justify-content: space-around;
 }
 
 .search input,
@@ -125,6 +136,11 @@ button {
   background-color: #1f4d3a;
   color: white;
   transition-duration: 0.3s;
+}
+
+button a {
+  color: white !important;
+  text-decoration: none;
 }
 
 .search button:hover {

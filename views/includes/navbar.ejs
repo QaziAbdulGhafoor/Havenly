@@ -21,9 +21,12 @@
           <a class="nav-link" href="/listings">Explore</a>
         </li>
       </ul>
-  <div class="search ms-auto">
-      <input type="text" placeholder="Search Here"><button>Search</button>
+      <form action="/listings"  method="get" class="ms-auto">
+      <div class="search ">
+      <input type="text" name="search" placeholder="Search Here">
+      <button type="submit">Search</button>
     </div>
+      </form>
       <ul class="navbar-nav ms-auto">
          <li class="nav-item">
           <a class="nav-link" href="/listings/new">Become A Host</a>

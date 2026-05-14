@@ -21,6 +21,7 @@ async function getCoord(address) {
 
 module.exports.index = async (req, res) => {
   let category = req.query.category;
+  let search = req.query.search;
   let listings;
   if (category) {
     listings = await Listing.find({ category: category })
@@ -32,6 +33,21 @@ module.exports.index = async (req, res) => {
       req.flash("error", `Sorry! Nothing in ${category} category`);
       res.redirect("/listings");
     }
+  } else if (search) {
+    listings = await Listing.find({
+      $or: [
+        { title: { $regex: search, $options: "i" } },
+        { location: { $regex: search, $options: "i" } },
+        { country: { $regex: search, $options: "i" } },
+      ],
+    });
+    // if (listings.length !== 0) {
+    //   res.render("listings/index", { listings });
+    // } else {
+    //   req.flash("error", `Sorry! Nothing for '${search}'`);
+    //   res.redirect("/listings");
+    // }
+    res.render("listings/index", { listings });
   } else {
     listings = await Listing.find({}).populate("reviews").populate("owner");
     res.render("listings/index", { listings });
@@ -42,12 +58,12 @@ module.exports.postNew = async (req, res) => {
   let url = req.file.path;
   let filename = req.file.filename;
   let listing = new Listing(req.body.listing);
-  // let address = req.body.listing.location;
-  // const coordinates = await getCoord(address);
-  // listing.geometry = {
-  //   type: "Point",
-  //   coordinates: coordinates,
-  // };
+  let address = req.body.listing.location;
+  const coordinates = await getCoord(address);
+  listing.geometry = {
+    type: "Point",
+    coordinates: coordinates,
+  };
   listing.owner = req.user._id;
   listing.image = { url, filename };
   await listing.save();
@@ -79,9 +95,8 @@ module.exports.postUpdate = async (req, res) => {
 module.exports.getUpdate = async (req, res) => {
   let { id } = req.params;
   let Mylisting = await Listing.findOne({ _id: id });
-
   let originalImage = Mylisting.image.url;
-  originalImage = originalImage.replace("/upload", "/upload/w_250,h_300");
+  originalImage = originalImage.replace("/upload", "/upload/w_150,h_150");
   res.render("listings/edit", { Mylisting, originalImage });
 };
 
