@@ -61,9 +61,11 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
+let mongoUrl = process.env.ATLAS_URL;
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Havenly");
+    await mongoose.connect(mongoUrl);
+    // "mongodb://127.0.0.1:27017/Havenly"
     console.log("MongoDB Connected successfully");
   } catch (err) {
     console.error(err.message);

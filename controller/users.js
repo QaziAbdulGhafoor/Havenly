@@ -9,7 +9,7 @@ module.exports.signup = async (req, res) => {
       if (err) {
         return next(err);
       } else {
-        req.flash("success", "user registered successfully");
+        req.flash("success", "Welcome to the Havenly");
         res.redirect("/listings");
       }
     });

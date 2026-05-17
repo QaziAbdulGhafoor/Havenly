@@ -100,11 +100,19 @@ a {
   #nav-logo {
     margin-left: 1rem;
   }
+  .signup-form {
+    margin-left: 3rem;
+    margin-top: 2rem;
+  }
 }
 
 @media (max-width: 770px) {
   .category-option p {
     display: none;
+  }
+  .detail-card img {
+    height: 15rem;
+    object-fit: cover;
   }
 }
 
@@ -208,4 +216,65 @@ p {
 
 #rev-stars {
   width: 10%;
+}
+
+.signup-form {
+  background-color: #f8fafc;
+  width: 19rem;
+  height: 25rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.signup-form button {
+  height: 2.5rem;
+  width: 7rem;
+  align-self: center;
+}
+
+.signup-form input {
+  width: 80%;
+  margin-left: 2rem;
+}
+
+.signup-form label {
+  margin-left: 2rem;
+}
+
+.signup-form p,
+h1 {
+  align-self: center;
+}
+
+.signup-form input:focus {
+  border: 2px solid rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 0 0.3rem rgba(34, 197, 94, 0.15);
+  outline: none;
+}
+
+.navbar {
+  width: 100vw !important;
+}
+
+.listing-form input:focus {
+  border: 2px solid rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 0 0.3rem rgba(34, 197, 94, 0.15);
+  outline: none;
+}
+
+.listing-form textarea:focus {
+  border: 2px solid rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 0 0.3rem rgba(34, 197, 94, 0.15);
+  outline: none;
+}
+
+.listing-form select:focus {
+  border: 2px solid rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 0 0.3rem rgba(34, 197, 94, 0.15);
+  outline: none;
 }
