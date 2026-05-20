@@ -114,6 +114,9 @@ a {
     height: 15rem;
     object-fit: cover;
   }
+  .detail-card {
+    border: none;
+  }
 }
 
 .search {

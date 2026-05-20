@@ -64,7 +64,7 @@ app.use("/", userRouter);
 let mongoUrl = process.env.ATLAS_URL;
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoUrl);
+    await mongoose.connect("mongodb://127.0.0.1:27017/Havenly");
     // "mongodb://127.0.0.1:27017/Havenly"
     console.log("MongoDB Connected successfully");
   } catch (err) {
@@ -94,27 +94,3 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("listening to port", 8080);
 });
-
-// try {
-//   const address = "Karachi,Sindh,Pakistan ";
-
-//   const result = await axios.get(
-//     `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
-//       address,
-//     )}&format=json&limit=1`,
-//     {
-//       headers: {
-//         "User-Agent": "havenly-app",
-//       },
-//     },
-//   );
-
-//   // const data = await result.json();
-
-//   console.log(result.data);
-
-//   res.send(result.data);
-// } catch (err) {
-//   console.log(err);
-//   res.status(500).send("Something went wrong");
-// }

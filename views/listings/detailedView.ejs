@@ -17,21 +17,16 @@
 
         <div class="card-body">
           <h5 class="card-title"><%= listing.title %></h5>
-          <p class="card-text"><%= listing.description %></p>
+          <h6 class="card-title">For :<%= listing.price %> $</h6>
+          <p class="card-text"><%= listing.description %>,<br> It is owned by <u><%= listing.owner.username %></u></p>
         </div>
 
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <b>Country:</b> <%= listing.country %>
-          </li>
-          <li class="list-group-item">
             <b>Location:</b> <%= listing.location %>
           </li>
-          <li class="list-group-item">
-            <b>Price:</b> <%= listing.price %><b> $</b>
-          </li>
-          <li class="list-group-item">
-            <b>Owner:</b> <%= listing.owner.username %>
+         <li class="list-group-item">
+            <b>Country:</b> <%= listing.country %>
           </li>
         </ul>
         <% if (user && user._id.equals(listing.owner._id)) { %>
@@ -42,7 +37,6 @@
           >
             Edit
           </a>
-
           <form
             action="/listings/<%= listing._id %>?_method=DELETE"
             method="POST"
