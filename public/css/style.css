@@ -1,4 +1,4 @@
-h1,
+/* h1,
 h2,
 h3,
 h4 {
@@ -8,13 +8,13 @@ body,
 button,
 input {
   font-family: "DM Sans", sans-serif;
-}
+} */
 
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: auto;
+  overflow: scroll;
 }
 #nav-logo {
   height: 3rem;
