@@ -20,6 +20,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/listings">Explore</a>
         </li>
+        <% if (user) { %>
+        <li><a class="nav-link" href="/listings/<%=user._id%>/favourites">Favourites</a> </ul></li>
+        <%}%>
       </ul>
       <form action="/listings"  method="get" class="ms-auto">
       <div class="search ">

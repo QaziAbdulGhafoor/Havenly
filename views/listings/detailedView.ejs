@@ -7,31 +7,30 @@
     <div class="sideimg">
     <img src="<%= listing.image.url ? listing.image.url : listing.image %>" alt="">
     </div>
-    <%  if (user && user._id.equals(listing.owner._id)) {  %>
-      <div class="options">
-         <a
-            href="/listings/<%= listing._id %>/edit"
-            class="btn btn-success"
-          >
-            Edit Listing
-          </a>
-          <form
-            action="/listings/<%= listing._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-danger">Delete Listing</button>
-          </form>
-      </div>
+    <% if (user && user._id.equals(listing.owner._id)) { %>
+  <div class="options">
+    <a href="/listings/<%= listing._id %>/edit" class="btn btn-success">
+      Edit Listing
+    </a>
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+      <button class="btn btn-danger">Delete Listing</button>
+    </form>
+  </div>
+
+<% } else if (user) { %>
+  <div class="options">
+    <% if (isFavourite) { %>
+      <form action="/listings/<%= listing._id %>/favourites?_method=DELETE" method="POST">
+        <button class="btn btn-danger">♥ Remove from Favourites</button>
+      </form>
     <% } else { %>
-      <div class="options">
-       <a
-            href=""
-            class="btn btn-success"
-          >
-            Add To Favourites
-          </a>
-          </div>
-    <%}%>
+      <form action="/listings/<%= listing._id %>/favourites" method="POST">
+        <button class="btn btn-success">♡ Add to Favourites</button>
+      </form>
+    <% } %>
+  </div>
+
+<% } %>
       <div class="headings"><h1 ><%= listing.title %></h1>
     <p ><i class="fa-solid fa-location-dot"></i><%= listing.location %> , <%= listing.country %></p></div>
     <div class="descriptions">
@@ -39,10 +38,7 @@
     <p ><%= listing.description %></p>
     </div>
     <div class="all-info">
-      <!-- <div class="info-box">
-        <span><i class="fa-solid fa-location-dot"></i></span>
-        <p>Location<br><%= listing.location %></p>
-      </div> -->
+    
       <div class="info-box">
          <span><i class="fa-solid fa-globe"></i></span>
         <p>Country <br><%= listing.country %></p>

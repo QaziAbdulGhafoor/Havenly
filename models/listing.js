@@ -19,7 +19,7 @@ const listingSchema = new Schema({
   reviews: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Review",
+      ref: "reviews",
     },
   ],
   owner: {
@@ -49,5 +49,5 @@ listingSchema.post("findOneAndDelete", async (listing) => {
   }
 });
 
-let Listing = new mongoose.model("Listing", listingSchema);
+let Listing = new mongoose.model("listings", listingSchema);
 module.exports = Listing;

@@ -1,5 +1,6 @@
 const Listing = require("../models/listing");
 const Review = require("../models/review");
+const User = require("../models/user");
 const axios = require("axios");
 
 async function getCoord(address) {
@@ -114,10 +115,16 @@ module.exports.detailedView = async (req, res) => {
   if (!listing) {
     req.flash("error", "Listing Not Found");
     res.redirect("/listings");
-  } else {
-    res.render("listings/detailedView", { listing });
-    // console.log(listing);
   }
+  let isFavourite = false;
+  if (req.user) {
+    let user = await User.findById(req.user._id);
+    isFavourite = user.favourites.some(
+      (favId) => favId.toString() === listing._id.toString(),
+    );
+  }
+
+  res.render("listings/detailedView", { listing, isFavourite });
 };
 
 module.exports.delete = async (req, res) => {
@@ -126,4 +133,40 @@ module.exports.delete = async (req, res) => {
   let result = await Listing.findByIdAndDelete(id);
   req.flash("success", `Listing ${listing.title} Deleted Successfully`);
   res.redirect(`/listings`);
+};
+
+module.exports.addnewfavourite = async (req, res) => {
+  let { id } = req.params;
+  let user = await User.findById(req.user._id);
+  let alreadySaved = user.favourites.some((favId) => favId.toString() === id);
+  if (!alreadySaved) {
+    user.favourites.push(id);
+    await user.save();
+    req.flash("success", "Added to favourites!");
+  }
+  res.redirect(`/listings/${id}`);
+};
+
+module.exports.showfavourites = async (req, res) => {
+  let userId = req.params.id;
+  let user = await User.findById(userId).populate("favourites");
+  if (!user) {
+    res.redirect("/listings");
+  }
+
+  if (user.favourites.length !== 0) {
+    res.render("listings/index", { listings: user.favourites });
+  } else {
+    req.flash("error", "no favourites saved by your account");
+    res.redirect("/listings");
+  }
+};
+
+module.exports.removeFavourite = async (req, res) => {
+  let { id } = req.params;
+  let user = await User.findById(req.user._id);
+  user.favourites = user.favourites.filter((favId) => favId.toString() !== id);
+  await user.save();
+  req.flash("success", "Removed from favourites!");
+  res.redirect(`/listings/${id}`);
 };

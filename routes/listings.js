@@ -12,7 +12,15 @@ const { validateListing } = require("../middleware");
 const listingController = require("../controller/listings");
 const multer = require("multer");
 const { storage } = require("../cloudConfig");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const User = require("../models/user");
 const upload = multer({ storage });
+
+router
+  .route("/:id/favourites")
+  .post(isLoggedIn, listingController.addnewfavourite)
+  .get(isLoggedIn, listingController.showfavourites)
+  .delete(isLoggedIn, listingController.removeFavourite);
 
 router
   .route("/")
