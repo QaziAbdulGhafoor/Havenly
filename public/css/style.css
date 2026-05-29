@@ -108,7 +108,7 @@ a {
 
 @media (max-width: 770px) {
   .category-option p {
-    display: auto auto;
+    display: none;
   }
   .detail-card img {
     height: 15rem;
