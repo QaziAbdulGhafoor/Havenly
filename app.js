@@ -83,6 +83,10 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+app.get("/", async (req, res) => {
+  const listings = await Listing.find({});
+  res.render("listings/index", { listings });
+});
 
 app.use((err, req, res, next) => {
   let { status = 500, message } = err;
