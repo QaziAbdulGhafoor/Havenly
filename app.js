@@ -88,6 +88,8 @@ app.use((err, req, res, next) => {
   let { status = 500, message } = err;
   res.status(status).render("listings/error.ejs", { err });
 });
-app.listen(process.env.PORT, () => {
+
+const port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", () => {
   console.log("listening to port");
 });
