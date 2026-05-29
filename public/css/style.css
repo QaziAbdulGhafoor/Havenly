@@ -108,7 +108,7 @@ a {
 
 @media (max-width: 770px) {
   .category-option p {
-    display: none;
+    display: auto auto;
   }
   .detail-card img {
     height: 15rem;
@@ -116,6 +116,9 @@ a {
   }
   .detail-card {
     border: none;
+  }
+  .signup-form {
+    margin-left: 1rem !important;
   }
 }
 
@@ -224,7 +227,7 @@ p {
 .signup-form {
   background-color: #f8fafc;
   width: 19rem;
-  height: 25rem !important;
+  height: 25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
