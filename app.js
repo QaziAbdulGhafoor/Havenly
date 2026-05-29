@@ -37,7 +37,6 @@ const SECRET = process.env.SECRET;
 const connectDB = async () => {
   try {
     await mongoose.connect(ATLAS_URL);
-    // "mongodb://127.0.0.1:27017/Havenly"
     console.log("MongoDB Connected successfully");
   } catch (err) {
     console.error(err.message);
