@@ -59,12 +59,12 @@ module.exports.postNew = async (req, res) => {
   let url = req.file.path;
   let filename = req.file.filename;
   let listing = new Listing(req.body.listing);
-  // let address = req.body.listing.location;
-  // const coordinates = await getCoord(address);
-  // listing.geometry = {
-  //   type: "Point",
-  //   coordinates: coordinates,
-  // };
+  let address = req.body.listing.location;
+  const coordinates = await getCoord(address);
+  listing.geometry = {
+    type: "Point",
+    coordinates: coordinates,
+  };
   listing.owner = req.user._id;
   listing.image = { url, filename };
   await listing.save();

@@ -12,6 +12,7 @@ const methodOverride = require("method-override");
 const ExpressError = require("./utils/ExpressError");
 const wrapAsync = require("./utils/wrapAsync");
 const session = require("express-session");
+const { MongoStore } = require("connect-mongo");
 const flash = require("connect-flash");
 const { listingSchema } = require("./schema");
 const passport = require("passport");
@@ -29,10 +30,33 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.static("assets"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-
 app.use(flash());
+
+const ATLAS_URL = process.env.ATLAS_URL;
+const SECRET = process.env.SECRET;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(ATLAS_URL);
+    // "mongodb://127.0.0.1:27017/Havenly"
+    console.log("MongoDB Connected successfully");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
+connectDB();
+
+const store = MongoStore.create({
+  mongoUrl: ATLAS_URL,
+  crypto: {
+    secret: SECRET,
+  },
+  touchAfter: 24 * 60 * 60,
+});
+
 let sessionVariables = {
-  secret: "AbdulHadi",
+  store,
+  secret: SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -60,32 +84,6 @@ app.use((req, res, next) => {
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
-
-let mongoUrl = process.env.ATLAS_URL;
-const connectDB = async () => {
-  try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/Havenly");
-    // "mongodb://127.0.0.1:27017/Havenly"
-    console.log("MongoDB Connected successfully");
-  } catch (err) {
-    console.error(err.message);
-    process.exit(1);
-  }
-};
-connectDB();
-
-// app.get("/demo", async (req, res) => {
-//   let newUser = new User({
-//     email: "abc@gmail.com",
-//     username: "abdulhanan",
-//   });
-
-//   let result = await User.register(newUser, "hellopassword");
-//   console.log(result);
-//   res.send("done user");
-// });
-
-// reviews
 
 app.use((err, req, res, next) => {
   let { status = 500, message } = err;
