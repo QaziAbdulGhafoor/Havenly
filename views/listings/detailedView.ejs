@@ -31,83 +31,38 @@
   </div>
 
 <% } %>
-      <div class="headings"><h1 ><%= listing.title %></h1>
-    <p ><i class="fa-solid fa-location-dot"></i><%= listing.location %> , <%= listing.country %></p></div>
+      <div class="headings"><h2 ><%= listing.title %></h2>
+    <span id="address"><i class="fa-solid fa-location-dot"></i><p class="low-text"><%= listing.location %></p></span></div>
     <div class="descriptions">
       <h4 >About this place</h4>
-    <p ><%= listing.description %></p>
+    <p class="low-text"><%= listing.description %></p>
     </div>
     <div class="all-info">
     
       <div class="info-box">
-         <span><i class="fa-solid fa-globe"></i></span>
-        <p>Country <br><%= listing.country %></p>
+         <i class="fa-solid fa-globe"></i>
+        <span>Country <br><p class="low-text"><%= listing.country %></p></span>
       </div>
       <div class="info-box">
-         <span><i class="fa-solid fa-tag"></i></span>
-        <p>Price <br><%= listing.price %>$/night</p>
+        <i class="fa-solid fa-tag"></i>
+        <span>Price <br><p class="low-text"><%= listing.price %>$/night</p></span>
+
       </div>
     </div>
     <div class="owner">
       <div class="profile-pic"><img src="/shortlogo.png" alt=""></div>
-      <div class="other-details"><h4>Hosted By:</h4>
-      <p><%= listing.owner.username %></p>
-      <p><%= listing.reviews.length %> reviews</p>
+      <div class="other-details"><p class="low-text">Hosted By:</p>
+      <h4><%= listing.owner.username %></h4>
+      <p class="low-text"><%= listing.reviews.length %> reviews</p>
     </div>
     </div>
    </div>
-  <!-- Listing Card -->
-   <!-- <h2 class="text-center mb-4 mt-2">
-    <%= listing.title %>
-  </h2> -->
-  <!-- <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      <div class="card detail-card mb-4">
-        <img
-          src="<%= listing.image.url ? listing.image.url : listing.image %>"
-          class="card-img-top"
-          alt="listing image"
-        />
 
-        <div class="card-body">
-          <h5 class="card-title"><%= listing.title %></h5>
-          <h6 class="card-title">For :<%= listing.price %> $</h6>
-          <p class="card-text"><%= listing.description %>,<br> It is owned by <u><%= listing.owner.username %></u></p>
-        </div>
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <b>Location:</b> <%= listing.location %>
-          </li>
-         <li class="list-group-item">
-            <b>Country:</b> <%= listing.country %>
-          </li>
-        </ul>
-        <% if (user && user._id.equals(listing.owner._id)) { %>
-          <div class="card-body d-flex gap-2">
-          <a
-            href="/listings/<%= listing._id %>/edit"
-            class="btn btn-success"
-          >
-            Edit
-          </a>
-          <form
-            action="/listings/<%= listing._id %>?_method=DELETE"
-            method="POST"
-          >
-            <button class="btn btn-danger">Delete</button>
-          </form>
-          </div>
-           <%  } %>
-          
-      </div>
-    </div>
-  </div> -->
 
   <!-- Review Form -->
   <div class="row justify-content-center">
     <div class="col-lg-8" >
-      <% if(user){ %>
+      <% if(user ){ %>
       <h1>Leave A Review</h1>
       <form
         action="/listings/<%= listing._id %>/reviews"
