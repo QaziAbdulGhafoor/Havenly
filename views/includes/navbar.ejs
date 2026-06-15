@@ -30,27 +30,42 @@
       <button type="submit">Search</button>
     </div>
       </form>
-      <ul class="navbar-nav ms-auto">
-         <li class="nav-item">
-          <a class="nav-link" href="/listings/new">Become A Host</a>
-        </li>
-        <% if(!user){ %>
-        <li class="nav-item">
-          <a class="nav-link active" href="/signup">Sign Up <i class="fa-solid fa-arrow-right-to-bracket"></i></a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li> -->
-       <% }%>
+      <ul class="navbar-nav ms-auto align-items-center gap-2">
+  
+  <!-- Become A Host -->
+  <li class="nav-item">
+    <a class="nav-link nav-host-link" href="/listings/new">
+      <i class="fa-solid fa-plus-circle"></i> Become A Host
+    </a>
+  </li>
 
-       <% if(user){ %>
-           <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout<i class="fa-solid fa-arrow-right-from-bracket"></i></a>
-        </li>
-       <%}%>
+  <!-- Sign Up — logged out -->
+  <% if(!user){ %>
+  <li class="nav-item">
+    <a class="nav-btn nav-btn-outline" href="/login">
+      Log In
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-btn nav-btn-solid" href="/signup">
+      Sign Up
+    </a>
+  </li>
+  <% } %>
 
+  <!-- Logout — logged in -->
+  <% if(user){ %>
+  <li class="nav-item d-flex align-items-center gap-2">
+    <span class="nav-username">
+      <i class="fa-solid fa-circle-user"></i> <%= user.username %>
+    </span>
+    <a class="nav-btn nav-btn-outline" href="/logout">
+      Log Out
+    </a>
+  </li>
+  <% } %>
 
-      </ul>
+</ul>
     </div>
   </div>
 </nav>

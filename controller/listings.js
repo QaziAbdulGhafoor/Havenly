@@ -14,6 +14,10 @@ async function getCoord(address) {
       },
     },
   );
+
+  if (!result.data || result.data.length === 0) {
+    throw new Error(`Location not found: ${address}`);
+  }
   return [Number(result.data[0].lon), Number(result.data[0].lat)];
 }
 // const coordinates = [result.data[0].lon, result.data[0].lat];

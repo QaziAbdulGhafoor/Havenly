@@ -10,6 +10,9 @@ body {
   flex-direction: column;
   min-height: 100vh;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   font-family: "Inter", sans-serif;
 }
 #nav-logo {
@@ -29,12 +32,67 @@ a {
   border: none;
 }
 
+/* ── NAV AUTH BUTTONS ─────────────────────── */
+.nav-btn {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-btn-outline {
+  border: 1.5px solid #1f4d3a;
+  color: #1f4d3a;
+  background: transparent;
+}
+
+.nav-btn-outline:hover {
+  background: #1f4d3a;
+  color: #ffffff;
+}
+
+.nav-btn-solid {
+  background: #1f4d3a;
+  color: #ffffff !important;
+  border: 1.5px solid #1f4d3a;
+}
+
+.nav-btn-solid:hover {
+  background: #17392b;
+  border-color: #17392b;
+}
+
+.nav-host-link {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f4d3a !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.nav-host-link:hover {
+  background: #f0f4f0;
+}
+
+.nav-username {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f4d3a;
+}
+
 /* hero  */
 /* ── HERO SECTION ────────────────────────── */
 /* ── HERO SECTION ────────────────────────── */
 .havenly-hero {
   /* background-color: #1f4d3a; */
-  background: linear-gradient(135deg, #1f4d3a 0%, #2d6a4f 100%);
+  background: linear-gradient(135deg, #0f2d1f 0%, #1f4d3a 50%, #2d6a4f 100%);
   padding: 70px 40px 60px;
   text-align: center;
   border-bottom: 1px solid #17392b;
