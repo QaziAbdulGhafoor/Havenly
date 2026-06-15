@@ -87,6 +87,55 @@ a {
   color: #1f4d3a;
 }
 
+/* ── MOBILE NAV FIX ─────────────────────── */
+@media (max-width: 991px) {
+  /* Center all nav items on mobile */
+  .navbar-nav {
+    align-items: center !important;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  /* Search bar full width on mobile */
+  .search {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .search input {
+    width: 100%;
+  }
+
+  /* Stack buttons nicely */
+  .navbar-nav.ms-auto {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 0;
+  }
+
+  /* Become A Host full width on mobile */
+  .nav-host-link {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Buttons side by side on mobile */
+  .nav-btn {
+    padding: 7px 16px;
+    font-size: 12px;
+  }
+
+  /* Add divider above auth buttons */
+  .navbar-nav.ms-auto {
+    border-top: 1px solid #e8e8e8;
+    margin-top: 8px;
+    padding-top: 12px;
+  }
+}
+
 /* hero  */
 /* ── HERO SECTION ────────────────────────── */
 /* ── HERO SECTION ────────────────────────── */
