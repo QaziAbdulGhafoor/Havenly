@@ -65,29 +65,21 @@ Havenly is a production-deployed web application that demonstrates a complete fu
 
 ```
 havenly/
-├── controllers/
-│   ├── listings.js
-│   ├── reviews.js
-│   └── users.js
+├── assets/
+├── controller/
 ├── models/
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-├── routes/
-│   ├── listing.js
-│   ├── review.js
-│   └── user.js
-├── views/
-│   ├── layouts/
-│   ├── listings/
-│   ├── users/
-│   └── partials/
 ├── public/
-│   ├── css/
-│   └── js/
-├── middleware.js
+├── routes/
+├── uploads/
+├── utils/
+├── views/
 ├── app.js
-└── .env
+├── cloudConfig.js
+├── middleware.js
+├── schema.js
+├── package.json
+├── .env
+└── .gitignore
 ```
 
 ---
