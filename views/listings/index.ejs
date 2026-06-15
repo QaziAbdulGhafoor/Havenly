@@ -1,5 +1,30 @@
  <% layout("layouts/boilerplate") %>
 <body>
+    <!-- hero -->
+    <div class="havenly-hero">
+  <div class="hero-content">
+    <p class="hero-tag">✦ Trusted by Thousands of Travelers</p>
+    <h1 class="hero-heading">Find Your Perfect Stay</h1>
+    <p class="hero-sub">Explore unique places to stay around the world — cabins, luxury villas, riverside retreats and more.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Listings</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-num">4.9★</span>
+        <span class="stat-label">Avg Rating</span>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat">
+        <span class="stat-num">10k+</span>
+        <span class="stat-label">Happy Guests</span>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- categories -->
  <div class="row g-4 mt-3">
     <div class="category">
         <a href="/listings?category=house" id="house"><span class="category-option"><i class="fa-solid fa-house"></i><p>House</p></span></a>
@@ -8,15 +33,14 @@
         <a href="/listings?category=mountain" id="mount"><span class="category-option"><i class="fa-solid fa-mountain" ></i><p>Mountains</p></span></a>
         <a href="/listings?category=luxury" id="luxury"><span class="category-option"><i class="fa-solid fa-gem" ></i><p>Luxury</p></span></a>
     </div>
-
     <% listings.forEach(listing => { %>
-        <div class="col-sm-6 col-lg-4 col-xl-3 ">
+        <div class="col-sm-6 col-lg-4 col-xl-3 mb-4">
             <a href="/listings/<%=listing._id%>" class="text-decoration-none">
                 <div class="card index-card h-100">
                     <img src="<%=listing.image.url%>" class="card-img-top" />
                     <div class="card-body index-titles">
                         <h5 class="card-title"><%=listing.title%></h5>
-                        <p class="card-text">Per Day: <b><%=listing.price%>$</b></p>
+                        <p class="card-text">Per Day: <%=listing.price%>$</p>
                     </div>
                 </div>
             </a>

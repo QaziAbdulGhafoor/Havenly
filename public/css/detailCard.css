@@ -41,7 +41,6 @@
 .headings {
   grid-area: 1/2/2/2;
   margin: 3rem 2rem 0 1rem;
-  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .headings i {
@@ -55,8 +54,6 @@
   display: flex;
 }
 .descriptions {
-  font-family: "Inter", sans-serif;
-
   grid-area: 2/2/3/2;
   margin: 0.25rem 1rem 0 1rem;
   overflow: scroll;
@@ -118,8 +115,6 @@ h4 {
 
 @media (max-width: 993px) {
   .detailedcard {
-    /* grid-template-columns: 1fr;
-    grid-template-rows: 4fr 2fr 3fr 1fr 2fr 1fr; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
